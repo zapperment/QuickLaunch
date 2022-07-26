@@ -280,6 +280,10 @@ LaunchCode:
     ;Run, "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
   Return
 
+HideMenu:
+  Esc::Gui, QuickLaunch:Hide
+  Return
+
 ; ------------------------------------------------
 ; Function to add a single QuickLaunch icon button
 ; to the virtual keyboard
@@ -293,7 +297,7 @@ AddQuickLaunchButton(name, icon, x, y, target)
 
 AddUnassignedButton(name, icon, x, y)
 {
-  Gui, Add, Button, x%x% y%y% h48 w48 hwnd%name%
+  Gui, Add, Button, x%x% y%y% h48 w48 gHideMenu hwnd%name%
   If !ImageButton.Create(%name%, [0, ICON_DIR . icon . ".png", , , , GUI_COLOR])
     MsgBox, 0, ImageButton Error, % ImageButton.LastError 
 
