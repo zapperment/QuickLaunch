@@ -7,6 +7,7 @@ SetWorkingDir, %A_ScriptDir%
 
 Global QL_VERSION := 3.2
 Global ICON_DIR := A_WorkingDir . "/icons/"
+Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
 
 ; -----------------------------------------------
@@ -32,68 +33,70 @@ Gui, QuickLaunch:New, +AlwaysOnTop +ToolWindow, QuickLaunch
 Gui, Color, %GUI_COLOR%
 Gui, Font, s10
 Gui, -Caption
-Gui, Add, Picture, x10 y10 h48 w48, %ICON_DIR%KeyF1.ico
-Gui, Add, Picture, x68 y10 h48 w48, %ICON_DIR%KeyF2.ico
-Gui, Add, Picture, x126 y10 h48 w48, %ICON_DIR%KeyF3.ico
-Gui, Add, Picture, x184 y10 h48 w48, %ICON_DIR%KeyF4.ico
-Gui, Add, Picture, x242 y10 h48 w48, %ICON_DIR%KeyF5.ico
-Gui, Add, Picture, x300 y10 h48 w48, %ICON_DIR%KeyF6.ico
-Gui, Add, Picture, x358 y10 h48 w48, %ICON_DIR%KeyF7.ico
-Gui, Add, Picture, x416 y10 h48 w48, %ICON_DIR%KeyF8.ico
-Gui, Add, Picture, x474 y10 h48 w48, %ICON_DIR%KeyF9.ico
-Gui, Add, Picture, x532 y10 h48 w48, %ICON_DIR%KeyF10.ico
-Gui, Add, Picture, x590 y10 h48 w48, %ICON_DIR%KeyF11.ico
-Gui, Add, Picture, x648 y10 h48 w48, %ICON_DIR%KeyF12.ico
-Gui, Add, Picture, x10 y68 h48 w48, %ICON_DIR%Key1.ico
-Gui, Add, Picture, x68 y68 h48 w48, %ICON_DIR%Key2.ico
-Gui, Add, Picture, x126 y68 h48 w48, %ICON_DIR%Key3.ico
-Gui, Add, Picture, x184 y68 h48 w48, %ICON_DIR%Key4.ico
-Gui, Add, Picture, x242 y68 h48 w48, %ICON_DIR%Key5.ico
-Gui, Add, Picture, x300 y68 h48 w48, %ICON_DIR%Key6.ico
-Gui, Add, Picture, x358 y68 h48 w48, %ICON_DIR%Key7.ico
-Gui, Add, Picture, x416 y68 h48 w48, %ICON_DIR%Key8.ico
-Gui, Add, Picture, x474 y68 h48 w48, %ICON_DIR%Key9.ico
-Gui, Add, Picture, x532 y68 h48 w48, %ICON_DIR%Key0.ico
-Gui, Add, Picture, x590 y68 h48 w48, %ICON_DIR%KeyEsszett.ico
-Gui, Add, Picture, x648 y68 h48 w48, %ICON_DIR%KeyAccent.ico
-Gui, Add, Picture, x39 y126 h48 w48, %ICON_DIR%KeyQ.ico
-Gui, Add, Picture, x97 y126 h48 w48, %ICON_DIR%KeyW.ico
 
+AddUnassignedButton("UNASSIGNED_KeyF1", "KeyF1", 10, 10)
+AddUnassignedButton("UNASSIGNED_KeyF2", "KeyF2", 68, 10)
+AddUnassignedButton("UNASSIGNED_KeyF3", "KeyF3", 126, 10)
+AddUnassignedButton("UNASSIGNED_KeyF4", "KeyF4", 184, 10)
+AddUnassignedButton("UNASSIGNED_KeyF5", "KeyF5", 242, 10)
+AddUnassignedButton("UNASSIGNED_KeyF6", "KeyF6", 300, 10)
+AddUnassignedButton("UNASSIGNED_KeyF7", "KeyF7", 358, 10)
+AddUnassignedButton("UNASSIGNED_KeyF8", "KeyF8", 416, 10)
+AddUnassignedButton("UNASSIGNED_KeyF9", "KeyF9", 474, 10)
+AddUnassignedButton("UNASSIGNED_KeyF10", "KeyF10", 532, 10)
+AddUnassignedButton("UNASSIGNED_KeyF11", "KeyF11", 590, 10)
+AddUnassignedButton("UNASSIGNED_KeyF12", "KeyF12", 648, 10)
+
+AddUnassignedButton("UNASSIGNED_Key1", "Key1", 10, 68)
+AddUnassignedButton("UNASSIGNED_Key2", "Key2", 68, 68)
+AddUnassignedButton("UNASSIGNED_Key3", "Key3", 126, 68)
+AddUnassignedButton("UNASSIGNED_Key4", "Key4", 184, 68)
+AddUnassignedButton("UNASSIGNED_Key5", "Key5", 242, 68)
+AddUnassignedButton("UNASSIGNED_Key6", "Key6", 300, 68)
+AddUnassignedButton("UNASSIGNED_Key7", "Key7", 358, 68)
+AddUnassignedButton("UNASSIGNED_Key8", "Key8", 416, 68)
+AddUnassignedButton("UNASSIGNED_Key9", "Key9", 474, 68)
+AddUnassignedButton("UNASSIGNED_Key0", "Key0", 532, 68)
+AddUnassignedButton("UNASSIGNED_KeyEsszett", "KeyEsszett", 590, 68)
+AddUnassignedButton("UNASSIGNED_KeyAccent", "KeyAccent", 648, 68)
+
+AddUnassignedButton("UNASSIGNED_KeyQ", "KeyQ", 39, 126)
+AddUnassignedButton("UNASSIGNED_KeyW", "KeyW", 97, 126)
 AddQuickLaunchButton("Edge", "KeyE", 155, 126, "gLaunchEdge")
 AddQuickLaunchButton("Reason", "KeyR", 213, 126, "gLaunchReason")
 AddQuickLaunchButton("TotalCommander", "KeyT", 271, 126, "gLaunchTotalCommander")
 AddQuickLaunchButton("Sleep", "KeyZ", 329, 126, "gGoToSleep")
-Gui, Add, Picture, x387 y126 h48 w48, %ICON_DIR%KeyU.ico
-Gui, Add, Picture, x445 y126 h48 w48, %ICON_DIR%KeyI.ico
+AddUnassignedButton("UNASSIGNED_KeyU", "KeyU", 387, 126)
+AddUnassignedButton("UNASSIGNED_KeyI", "KeyI", 445, 126)
 AddQuickLaunchButton("Notion", "KeyO", 503, 126, "gLaunchNotion")
-Gui, Add, Picture, x561 y126 h48 w48, %ICON_DIR%KeyP.ico
-Gui, Add, Picture, x619 y126 h48 w48, %ICON_DIR%KeyUmlautU.ico
+AddUnassignedButton("UNASSIGNED_KeyP", "KeyP", 561, 126)
+AddUnassignedButton("UNASSIGNED_KeyUmlautU", "KeyUmlautU", 619, 126)
 AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
 
-Gui, Add, Picture, x54 y184 h48 w48, %ICON_DIR%KeyA.ico
-Gui, Add, Picture, x112 y184 h48 w48, %ICON_DIR%KeyS.ico
+AddQuickLaunchButton("GMail", "KeyA", 54, 184, "gLaunchGMail")
+AddUnassignedButton("UNASSIGNED_KeyS", "KeyS", 112, 184)
 AddQuickLaunchButton("GoogleDocs", "KeyD", 170, 184, "gLaunchGDocs")
-Gui, Add, Picture, x228 y184 h48 w48, %ICON_DIR%KeyF.ico
+AddUnassignedButton("UNASSIGNED_KeyF", "KeyF", 228, 184)
 AddQuickLaunchButton("GitBash", "KeyG", 286, 184, "gLaunchBash")
 AddQuickLaunchButton("GoogleSheets", "KeyH", 344, 184, "gLaunchGSheets")
-Gui, Add, Picture, x402 y184 h48 w48, %ICON_DIR%KeyJ.ico
-Gui, Add, Picture, x460 y184 h48 w48, %ICON_DIR%KeyK.ico
+AddUnassignedButton("UNASSIGNED_KeyJ", "KeyJ", 402, 184)
+AddUnassignedButton("UNASSIGNED_KeyK", "KeyK", 460, 184)
 AddQuickLaunchButton("AbletonLive", "KeyL", 518, 184, "gLaunchLive")
-Gui, Add, Picture, x576 y184 h48 w48, %ICON_DIR%KeyUmlautO.ico
-Gui, Add, Picture, x634 y184 h48 w48, %ICON_DIR%KeyUmlautA.ico
-Gui, Add, Picture, x692 y184 h48 w48, %ICON_DIR%KeyHash.ico
+AddUnassignedButton("UNASSIGNED_KeyUmlautO", "KeyUmlautO", 576, 184)
+AddUnassignedButton("UNASSIGNED_KeyUmlautA", "KeyUmlautA", 634, 184)
+AddUnassignedButton("UNASSIGNED_KeyHash", "KeyHash", 692, 184)
 
-Gui, Add, Picture, x25 y242 h48 w48, %ICON_DIR%KeyLessThan.ico
-Gui, Add, Picture, x83 y242 h48 w48, %ICON_DIR%KeyY.ico
+AddUnassignedButton("UNASSIGNED_KeyLessThan", "KeyLessThan", 25, 242)
+AddQuickLaunchButton("Spotify", "KeyY", 83, 242, "gLaunchSpotify")
 AddQuickLaunchButton("Max", "KeyX", 141, 242, "gLaunchMax")
-AddQuickLaunchButton("Code", "KeyV", 199, 242, "gLaunchCode")
-Gui, Add, Picture, x257 y242 h48 w48, %ICON_DIR%KeyC.ico
-Gui, Add, Picture, x315 y242 h48 w48, %ICON_DIR%KeyB.ico
-Gui, Add, Picture, x373 y242 h48 w48, %ICON_DIR%KeyN.ico
-AddQuickLaunchButton("GMail", "KeyM", 431, 242, "gLaunchGMail")
-Gui, Add, Picture, x489 y242 h48 w48, %ICON_DIR%KeyComma.ico
-Gui, Add, Picture, x547 y242 h48 w48, %ICON_DIR%KeyPeriod.ico
-Gui, Add, Picture, x605 y242 h48 w48, %ICON_DIR%KeyDash.ico
+AddQuickLaunchButton("Code", "KeyC", 199, 242, "gLaunchCode")
+AddUnassignedButton("UNASSIGNED_KeyV", "KeyV", 257, 242)
+AddUnassignedButton("UNASSIGNED_KeyB", "KeyB", 315, 242)
+AddUnassignedButton("UNASSIGNED_KeyN", "KeyN", 373, 242)
+AddUnassignedButton("UNASSIGNED_KeyM", "KeyM", 431, 242)
+AddUnassignedButton("UNASSIGNED_KeyComma", "KeyComma", 489, 242)
+AddUnassignedButton("UNASSIGNED_KeyPeriod", "KeyPeriod", 547, 242)
+AddUnassignedButton("UNASSIGNED_KeyDash", "KeyDash", 605, 242)
 
 Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with love by Zapperment!
 
@@ -104,19 +107,20 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; ---------------------------------------------------------
 
 #IfWinActive, QuickLaunch, Zapperment
-  l::Gosub, LaunchLive
   e::Gosub, LaunchEdge
-  g::Gosub, LaunchBash
-  d::Gosub, LaunchGDocs
-  m::Gosub, LaunchGMail
-  h::Gosub, LaunchGSheets
-  x::Gosub, LaunchMax
-  o::Gosub, LaunchNotion
   r::Gosub, LaunchReason
-  +::Gosub, LaunchReasonPlus
-  z::Gosub, GoToSleep
   t::Gosub, LaunchTotalCommander
-  v::Gosub, LaunchCode
+  z::Gosub, GoToSleep
+  o::Gosub, LaunchNotion
+  +::Gosub, LaunchReasonPlus
+  a::Gosub, LaunchGMail
+  d::Gosub, LaunchGDocs
+  g::Gosub, LaunchBash
+  h::Gosub, LaunchGSheets
+  l::Gosub, LaunchLive
+  y::Gosub, LaunchSpotify
+  x::Gosub, LaunchMax
+  c::Gosub, LaunchCode
   Esc::Gui, QuickLaunch:Hide
 #IfWinActive
 
@@ -136,7 +140,6 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
     SetDefaultKeyboard(0x0407)
     Return
 #IfWinActive
-
 
 ; -----------------------------------
 ; Shortcut and subroutine to show the
@@ -247,6 +250,17 @@ LaunchReasonPlus:
     ;Run, "%LOCALAPPDATA%\Programs\reason-plus-companion-app\Reason+ Companion.exe"
   Return
 
+LaunchSpotify:
+  Gui, QuickLaunch:Hide
+  If WinExist("ahk_exe Spotify.exe") 
+    WinActivate
+  Else
+    ; Spotify is an app from the Windows store, with a freakishly
+    ; complicated path, so we've created a link for it in the /links
+    ; sub-directory 
+    Run, "%LINK_DIR%Spotify.lnk"
+  Return
+
 LaunchTotalCommander:
   Gui, QuickLaunch:Hide
   If WinExist("ahk_exe TOTALCMD64.EXE") 
@@ -273,6 +287,13 @@ LaunchCode:
 AddQuickLaunchButton(name, icon, x, y, target)
 {
   Gui, Add, Button, x%x% y%y% h48 w48 %target% hwnd%name%
+  If !ImageButton.Create(%name%, [0, ICON_DIR . icon . ".png", , , , GUI_COLOR])
+    MsgBox, 0, ImageButton Error, % ImageButton.LastError 
+}
+
+AddUnassignedButton(name, icon, x, y)
+{
+  Gui, Add, Button, x%x% y%y% h48 w48 hwnd%name%
   If !ImageButton.Create(%name%, [0, ICON_DIR . icon . ".png", , , , GUI_COLOR])
     MsgBox, 0, ImageButton Error, % ImageButton.LastError 
 
