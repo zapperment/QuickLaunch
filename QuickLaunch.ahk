@@ -121,7 +121,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   y::Gosub, LaunchSpotify
   x::Gosub, LaunchMax
   c::Gosub, LaunchCode
-  Esc::Gui, QuickLaunch:Hide
+  Esc::Gosub, HideMenu
 #IfWinActive
 
 ; ----------------------------------------------------------
@@ -147,11 +147,11 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; -----------------------------------
 
 MButton::
-  Gui, QuickLaunch:Show
+  Gosub, ShowMenu
   Return
 
 ShowGui:
-  Gui, QuickLaunch:Show
+  Gosub, ShowMenu
   Return
 
 ; --------------------------------------
@@ -159,7 +159,7 @@ ShowGui:
 ; --------------------------------------
 
 LaunchLive:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Ableton Live 10 Suite.exe") 
     WinActivate
   Else
@@ -167,7 +167,7 @@ LaunchLive:
   Return
 
 LaunchGDocs:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("Dokumente") 
     WinActivate
   Else
@@ -175,7 +175,7 @@ LaunchGDocs:
   Return
 
 LaunchEdge:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe msedge.exe") 
     WinActivate
   Else
@@ -183,7 +183,7 @@ LaunchEdge:
   Return
 
 LaunchBash:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe mintty.exe") 
     WinActivate
   Else
@@ -191,7 +191,7 @@ LaunchBash:
   Return
 
 LaunchMax:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Max.exe") 
     WinActivate
   ; Max can only be started through Ableton Live,
@@ -199,7 +199,7 @@ LaunchMax:
   Return
 
 LaunchNotion:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Notion.exe")
     WinActivate
   Else
@@ -210,7 +210,7 @@ LaunchNotion:
   Return
 
 LaunchGMail:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("Gmail") 
     WinActivate
   Else
@@ -218,7 +218,7 @@ LaunchGMail:
   Return
 
 LaunchGSheets:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("Tabellen") 
     WinActivate
   Else
@@ -226,12 +226,12 @@ LaunchGSheets:
   Return
 
 GoToSleep:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
   Return
 
 LaunchReason:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Reason.exe") 
     WinActivate
   Else
@@ -239,7 +239,7 @@ LaunchReason:
   Return
 
 LaunchReasonPlus:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Reason+ Companion.exe") 
     WinActivate
   Else
@@ -251,7 +251,7 @@ LaunchReasonPlus:
   Return
 
 LaunchSpotify:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Spotify.exe") 
     WinActivate
   Else
@@ -262,7 +262,7 @@ LaunchSpotify:
   Return
 
 LaunchTotalCommander:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe TOTALCMD64.EXE") 
     WinActivate
   Else
@@ -270,7 +270,7 @@ LaunchTotalCommander:
   Return
 
 LaunchCode:
-  Gui, QuickLaunch:Hide
+  Gosub, HideMenu
   If WinExist("ahk_exe Code.exe") 
     WinActivate
   Else
@@ -280,8 +280,12 @@ LaunchCode:
     ;Run, "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
   Return
 
+ShowMenu:
+  Gui, QuickLaunch:Show
+  Return
+
 HideMenu:
-  Esc::Gui, QuickLaunch:Hide
+  Gui, QuickLaunch:Hide
   Return
 
 ; ------------------------------------------------
