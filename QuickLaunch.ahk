@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.4
+Global QL_VERSION := 3.5
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -61,7 +61,7 @@ AddUnassignedButton("UNASSIGNED_KeyEsszett", "KeyEsszett", 590, 68)
 AddUnassignedButton("UNASSIGNED_KeyAccent", "KeyAccent", 648, 68)
 
 AddUnassignedButton("UNASSIGNED_KeyQ", "KeyQ", 39, 126)
-AddUnassignedButton("UNASSIGNED_KeyW", "KeyW", 97, 126)
+AddQuickLaunchButton("WhatsApp", "KeyW", 97, 126, "gLaunchWhatsApp")
 AddQuickLaunchButton("Edge", "KeyE", 155, 126, "gLaunchEdge")
 AddQuickLaunchButton("Reason", "KeyR", 213, 126, "gLaunchReason")
 AddQuickLaunchButton("TotalCommander", "KeyT", 271, 126, "gLaunchTotalCommander")
@@ -90,7 +90,7 @@ AddUnassignedButton("UNASSIGNED_KeyLessThan", "KeyLessThan", 25, 242)
 AddQuickLaunchButton("Spotify", "KeyY", 83, 242, "gLaunchSpotify")
 AddQuickLaunchButton("Max", "KeyX", 141, 242, "gLaunchMax")
 AddQuickLaunchButton("Code", "KeyC", 199, 242, "gLaunchCode")
-AddUnassignedButton("UNASSIGNED_KeyV", "KeyV", 257, 242)
+AddQuickLaunchButton("Vim", "KeyV", 257, 242, "gLaunchVim")
 AddUnassignedButton("UNASSIGNED_KeyB", "KeyB", 315, 242)
 AddUnassignedButton("UNASSIGNED_KeyN", "KeyN", 373, 242)
 AddUnassignedButton("UNASSIGNED_KeyM", "KeyM", 431, 242)
@@ -107,6 +107,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; ---------------------------------------------------------
 
 #IfWinActive, QuickLaunch, Zapperment
+  w::Gosub, LaunchWhatsApp
   e::Gosub, LaunchEdge
   r::Gosub, LaunchReason
   t::Gosub, LaunchTotalCommander
@@ -121,6 +122,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   y::Gosub, LaunchSpotify
   x::Gosub, LaunchMax
   c::Gosub, LaunchCode
+  v::Gosub, LaunchVim
   Esc::Gosub, HideMenu
 #IfWinActive
 
@@ -172,6 +174,14 @@ LaunchGDocs:
     WinActivate
   Else
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Dokumente.lnk"
+  Return
+
+LaunchWhatsApp:
+  Gosub, HideMenu
+  If WinExist("ahk_exe WhatsApp.exe") 
+    WinActivate
+  Else
+    Run, "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2228.14.0_x64__cv1g1gvanyjgm\app\WhatsApp.exe"
   Return
 
 LaunchEdge:
@@ -278,6 +288,14 @@ LaunchCode:
     ; For some reason, a Run WON'T WORK with Electron apps like this one, 
     ; so using a hotkey defined with WinHotKey 
     ;Run, "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
+  Return
+
+LaunchVim:
+  Gosub, HideMenu
+  If WinExist("ahk_exe gvim.exe") 
+    WinActivate
+  Else
+    Run, "C:\Program Files (x86)\Vim\vim90\gvim.exe"
   Return
 
 ShowMenu:
