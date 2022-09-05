@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.5
+Global QL_VERSION := 3.6
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -48,7 +48,7 @@ AddUnassignedButton("UNASSIGNED_KeyF11", "KeyF11", 590, 10)
 AddUnassignedButton("UNASSIGNED_KeyF12", "KeyF12", 648, 10)
 
 AddUnassignedButton("UNASSIGNED_Key1", "Key1", 10, 68)
-AddUnassignedButton("UNASSIGNED_Key2", "Key2", 68, 68)
+AddQuickLaunchButton("Downloads", "Key2", 68, 68, "gLaunchDownloads")
 AddUnassignedButton("UNASSIGNED_Key3", "Key3", 126, 68)
 AddUnassignedButton("UNASSIGNED_Key4", "Key4", 184, 68)
 AddUnassignedButton("UNASSIGNED_Key5", "Key5", 242, 68)
@@ -107,6 +107,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; ---------------------------------------------------------
 
 #IfWinActive, QuickLaunch, Zapperment
+  2::Gosub, LaunchDownloads
   w::Gosub, LaunchWhatsApp
   e::Gosub, LaunchEdge
   r::Gosub, LaunchReason
@@ -159,6 +160,12 @@ ShowGui:
 ; --------------------------------------
 ; Subroutines to launch the various apps
 ; --------------------------------------
+
+LaunchDownloads:
+  Gosub, HideMenu
+  ; Total Commander doesn't need distinction between is running or not
+  Run, "C:\Program Files\totalcmd\TOTALCMD64.EXE" /single C:\Users\wieka\Download
+  Return
 
 LaunchLive:
   Gosub, HideMenu
