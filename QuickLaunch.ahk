@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.6
+Global QL_VERSION := 3.7
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -69,7 +69,7 @@ AddQuickLaunchButton("Sleep", "KeyZ", 329, 126, "gGoToSleep")
 AddUnassignedButton("UNASSIGNED_KeyU", "KeyU", 387, 126)
 AddUnassignedButton("UNASSIGNED_KeyI", "KeyI", 445, 126)
 AddQuickLaunchButton("Notion", "KeyO", 503, 126, "gLaunchNotion")
-AddUnassignedButton("UNASSIGNED_KeyP", "KeyP", 561, 126)
+AddQuickLaunchButton("Passwords", "KeyP", 561, 126, "gLaunchPasswords")
 AddUnassignedButton("UNASSIGNED_KeyUmlautU", "KeyUmlautU", 619, 126)
 AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
 
@@ -114,6 +114,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   t::Gosub, LaunchTotalCommander
   z::Gosub, GoToSleep
   o::Gosub, LaunchNotion
+  p::Gosub, LaunchPasswords
   +::Gosub, LaunchReasonPlus
   a::Gosub, LaunchGMail
   d::Gosub, LaunchGDocs
@@ -224,6 +225,14 @@ LaunchNotion:
     ; For some reason, a Run WON'T WORK with Electron apps like this one, 
     ; so using a hotkey defined with WinHotKey 
     ; Run, "C:\Users\wieka\AppData\Local\Programs\Notion\Notion.exe"
+  Return
+
+LaunchPasswords:
+  Gosub, HideMenu
+  If WinExist("ahk_exe iCloudPasswords.exe")
+    WinActivate
+  Else
+    Run, C:\Program Files\WindowsApps\AppleInc.iCloud_13.4.101.0_x86__nzyj5cx40ttqa\iCloud\iCloudPasswords.exe
   Return
 
 LaunchGMail:
