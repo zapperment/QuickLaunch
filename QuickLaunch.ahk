@@ -164,7 +164,7 @@ ShowGui:
 LaunchDownloads:
   Gosub, HideMenu
   ; Total Commander doesn't need distinction between is running or not
-  Run, "C:\Program Files\totalcmd\TOTALCMD64.EXE" /single C:\Users\wieka\Download
+  Run, "C:\Program Files\totalcmd\TOTALCMD64.EXE" /single C:\Users\wieka\Downloads
   Return
 
 LaunchLive:
