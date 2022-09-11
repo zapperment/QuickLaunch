@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.7
+Global QL_VERSION := 3.8
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -80,7 +80,7 @@ AddUnassignedButton("UNASSIGNED_KeyF", "KeyF", 228, 184)
 AddQuickLaunchButton("GitBash", "KeyG", 286, 184, "gLaunchBash")
 AddQuickLaunchButton("GoogleSheets", "KeyH", 344, 184, "gLaunchGSheets")
 AddUnassignedButton("UNASSIGNED_KeyJ", "KeyJ", 402, 184)
-AddUnassignedButton("UNASSIGNED_KeyK", "KeyK", 460, 184)
+AddQuickLaunchButton("GCalendar", "KeyK", 460, 184, "gLaunchGCalendar")
 AddQuickLaunchButton("AbletonLive", "KeyL", 518, 184, "gLaunchLive")
 AddUnassignedButton("UNASSIGNED_KeyUmlautO", "KeyUmlautO", 576, 184)
 AddUnassignedButton("UNASSIGNED_KeyUmlautA", "KeyUmlautA", 634, 184)
@@ -120,6 +120,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   d::Gosub, LaunchGDocs
   g::Gosub, LaunchBash
   h::Gosub, LaunchGSheets
+  k::Gosub, LaunchGCalendar
   l::Gosub, LaunchLive
   y::Gosub, LaunchSpotify
   x::Gosub, LaunchMax
@@ -174,6 +175,14 @@ LaunchLive:
     WinActivate
   Else
     Run, "C:\ProgramData\Ableton\Live 10 Suite\Program\Ableton Live 10 Suite.exe"
+  Return
+
+LaunchGCalendar:
+  Gosub, HideMenu
+  If WinExist("Google Calendar") 
+    WinActivate
+  Else
+    Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Google Calendar.lnk"
   Return
 
 LaunchGDocs:
