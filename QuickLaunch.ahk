@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.9
+Global QL_VERSION := 3.10
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -74,7 +74,7 @@ AddUnassignedButton("UNASSIGNED_KeyUmlautU", "KeyUmlautU", 619, 126)
 AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
 
 AddQuickLaunchButton("GMail", "KeyA", 54, 184, "gLaunchGMail")
-AddUnassignedButton("UNASSIGNED_KeyS", "KeyS", 112, 184)
+AddQuickLaunchButton("PowerShell", "KeyS", 112, 184, "gLaunchPowerShell")
 AddQuickLaunchButton("GoogleDocs", "KeyD", 170, 184, "gLaunchGDocs")
 AddUnassignedButton("UNASSIGNED_KeyF", "KeyF", 228, 184)
 AddQuickLaunchButton("GitBash", "KeyG", 286, 184, "gLaunchBash")
@@ -117,6 +117,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   p::Gosub, LaunchPasswords
   +::Gosub, LaunchReasonPlus
   a::Gosub, LaunchGMail
+  s::Gosub, LaunchPowerShell
   d::Gosub, LaunchGDocs
   g::Gosub, LaunchBash
   h::Gosub, LaunchGSheets
@@ -283,6 +284,17 @@ LaunchReasonPlus:
     ; so using a hotkey defined with WinHotKey 
     ;Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason+ Companion.exe"
     ;Run, "%LOCALAPPDATA%\Programs\reason-plus-companion-app\Reason+ Companion.exe"
+  Return
+
+LaunchPowerShell:
+  Gosub, HideMenu
+  If WinExist("ahk_exe pwsh.exe") 
+    WinActivate
+  Else
+    ; Spotify is an app from the Windows store, with a freakishly
+    ; complicated path, so we've created a link for it in the /links
+    ; sub-directory 
+    Run, "%LINK_DIR%PowerShell.lnk"
   Return
 
 LaunchSpotify:
