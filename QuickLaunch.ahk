@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.10
+Global QL_VERSION := 3.20
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -47,9 +47,9 @@ AddUnassignedButton("UNASSIGNED_KeyF10", "KeyF10", 532, 10)
 AddUnassignedButton("UNASSIGNED_KeyF11", "KeyF11", 590, 10)
 AddUnassignedButton("UNASSIGNED_KeyF12", "KeyF12", 648, 10)
 
-AddUnassignedButton("UNASSIGNED_Key1", "Key1", 10, 68)
+AddQuickLaunchButton("Duet", "Key1", 10, 68, "gLaunchDuet")
 AddQuickLaunchButton("Downloads", "Key2", 68, 68, "gLaunchDownloads")
-AddUnassignedButton("UNASSIGNED_Key3", "Key3", 126, 68)
+AddQuickLaunchButton("Bome", "Key3", 126, 68, "gLaunchBome")
 AddUnassignedButton("UNASSIGNED_Key4", "Key4", 184, 68)
 AddUnassignedButton("UNASSIGNED_Key5", "Key5", 242, 68)
 AddUnassignedButton("UNASSIGNED_Key6", "Key6", 300, 68)
@@ -62,15 +62,15 @@ AddUnassignedButton("UNASSIGNED_KeyAccent", "KeyAccent", 648, 68)
 
 AddUnassignedButton("UNASSIGNED_KeyQ", "KeyQ", 39, 126)
 AddQuickLaunchButton("WhatsApp", "KeyW", 97, 126, "gLaunchWhatsApp")
-AddQuickLaunchButton("Edge", "KeyE", 155, 126, "gLaunchEdge")
+AddQuickLaunchButton("Chrome", "KeyE", 155, 126, "gLaunchChrome")
 AddQuickLaunchButton("Reason", "KeyR", 213, 126, "gLaunchReason")
 AddQuickLaunchButton("TotalCommander", "KeyT", 271, 126, "gLaunchTotalCommander")
 AddQuickLaunchButton("Sleep", "KeyZ", 329, 126, "gGoToSleep")
 AddUnassignedButton("UNASSIGNED_KeyU", "KeyU", 387, 126)
-AddUnassignedButton("UNASSIGNED_KeyI", "KeyI", 445, 126)
+AddQuickLaunchButton("Illustrator", "KeyI", 445, 126, "gLaunchIllustrator")
 AddQuickLaunchButton("Notion", "KeyO", 503, 126, "gLaunchNotion")
 AddQuickLaunchButton("Passwords", "KeyP", 561, 126, "gLaunchPasswords")
-AddUnassignedButton("UNASSIGNED_KeyUmlautU", "KeyUmlautU", 619, 126)
+AddQuickLaunchButton("Premiere", "KeyUmlautU", 619, 126, "gLaunchPremiere")
 AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
 
 AddQuickLaunchButton("GMail", "KeyA", 54, 184, "gLaunchGMail")
@@ -91,8 +91,8 @@ AddQuickLaunchButton("Spotify", "KeyY", 83, 242, "gLaunchSpotify")
 AddQuickLaunchButton("Max", "KeyX", 141, 242, "gLaunchMax")
 AddQuickLaunchButton("Code", "KeyC", 199, 242, "gLaunchCode")
 AddQuickLaunchButton("Vim", "KeyV", 257, 242, "gLaunchVim")
-AddUnassignedButton("UNASSIGNED_KeyB", "KeyB", 315, 242)
-AddUnassignedButton("UNASSIGNED_KeyN", "KeyN", 373, 242)
+AddQuickLaunchButton("Photoshop", "KeyB", 315, 242, "gLaunchPhotoshop")
+AddQuickLaunchButton("Animate", "KeyN", 373, 242, "gLaunchAnimate")
 AddUnassignedButton("UNASSIGNED_KeyM", "KeyM", 431, 242)
 AddUnassignedButton("UNASSIGNED_KeyComma", "KeyComma", 489, 242)
 AddUnassignedButton("UNASSIGNED_KeyPeriod", "KeyPeriod", 547, 242)
@@ -107,12 +107,18 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; ---------------------------------------------------------
 
 #IfWinActive, QuickLaunch, Zapperment
+  1::Gosub, LaunchDuet
   2::Gosub, LaunchDownloads
+  3::Gosub, LaunchBome
   w::Gosub, LaunchWhatsApp
-  e::Gosub, LaunchEdge
+  e::Gosub, LaunchChrome
   r::Gosub, LaunchReason
   t::Gosub, LaunchTotalCommander
   z::Gosub, GoToSleep
+  i::Gosub, LaunchIllustrator
+  b::Gosub, LaunchPhotoshop
+  n::Gosub, LaunchAnimate
+  SC01A::Gosub, LaunchPremiere
   o::Gosub, LaunchNotion
   p::Gosub, LaunchPasswords
   +::Gosub, LaunchReasonPlus
@@ -144,7 +150,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
     Send, ^{\}
     Sleep, 100
     SetDefaultKeyboard(0x0407)
-    Return
+  Return
 #IfWinActive
 
 ; -----------------------------------
@@ -154,77 +160,128 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 
 #!^F1::
   Gosub, ShowMenu
-  Return
+Return
 
 ShowGui:
   Gosub, ShowMenu
-  Return
+Return
 
 ; --------------------------------------
 ; Subroutines to launch the various apps
 ; --------------------------------------
 
+LaunchDuet:
+  Gosub, HideMenu
+  If WinExist("ahk_exe duet.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Kairos\Duet Display\duet.exe"
+Return
+
+LaunchBome:
+  Gosub, HideMenu
+  If WinExist("ahk_exe MIDITranslator.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files (x86)\Bome MIDI Translator Pro\MIDITranslator.exe"
+Return
+
 LaunchDownloads:
   Gosub, HideMenu
   ; Total Commander doesn't need distinction between is running or not
   Run, "C:\Program Files\totalcmd\TOTALCMD64.EXE" /single C:\Users\wieka\Downloads
-  Return
+Return
 
 LaunchLive:
   Gosub, HideMenu
-  If WinExist("ahk_exe Ableton Live 10 Suite.exe") 
+  If WinExist("ahk_exe Ableton Live 10 Suite.exe")
     WinActivate
   Else
     Run, "C:\ProgramData\Ableton\Live 10 Suite\Program\Ableton Live 10 Suite.exe"
-  Return
+Return
 
 LaunchGCalendar:
   Gosub, HideMenu
-  If WinExist("Google Calendar") 
+  If WinExist("Google Calendar")
     WinActivate
   Else
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Google Calendar.lnk"
-  Return
+Return
 
 LaunchGDocs:
   Gosub, HideMenu
-  If WinExist("Dokumente") 
+  If WinExist("Dokumente")
     WinActivate
   Else
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Dokumente.lnk"
-  Return
+Return
 
 LaunchWhatsApp:
   Gosub, HideMenu
-  If WinExist("ahk_exe WhatsApp.exe") 
+  If WinExist("ahk_exe WhatsApp.exe")
     WinActivate
   Else
-    Run, "C:\Program Files\WindowsApps\5319275A.WhatsAppDesktop_2.2228.14.0_x64__cv1g1gvanyjgm\app\WhatsApp.exe"
-  Return
+    ; WhatsApp is an app from the Windows store, with a freakishly
+    ; complicated path, so we've created a link for it in the /links
+    ; sub-directory
+    Run, "%LINK_DIR%WhatsApp.lnk"
+Return
 
-LaunchEdge:
+LaunchChrome:
   Gosub, HideMenu
-  If WinExist("ahk_exe msedge.exe") 
+  If WinExist("ahk_exe chrome.exe")
     WinActivate
   Else
-    Run, "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-  Return
+    Run, "C:\Program Files\Google\Chrome\Application\chrome.exe"
+Return
 
 LaunchBash:
   Gosub, HideMenu
-  If WinExist("ahk_exe mintty.exe") 
+  If WinExist("ahk_exe mintty.exe")
     WinActivate
   Else
     Run, "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\Git Bash.lnk"
-  Return
+Return
 
 LaunchMax:
   Gosub, HideMenu
-  If WinExist("ahk_exe Max.exe") 
+  If WinExist("ahk_exe Max.exe")
     WinActivate
-  ; Max can only be started through Ableton Live,
-  ; so there is no "Else" here
-  Return
+; Max can only be started through Ableton Live,
+; so there is no "Else" here
+Return
+
+LaunchPhotoshop:
+  Gosub, HideMenu
+  If WinExist("ahk_exe Photshop.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Adobe\Adobe Photoshop 2023\Photoshop.exe"
+Return
+
+LaunchIllustrator:
+  Gosub, HideMenu
+  If WinExist("ahk_exe Illustrator.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Adobe\Adobe Illustrator 2023\Support Files\Contents\Windows\Illustrator.exe"
+Return
+
+LaunchAnimate:
+  Gosub, HideMenu
+  If WinExist("ahk_exe Animate.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Adobe\Adobe Animate 2023\Animate.exe"
+Return
+
+LaunchPremiere:
+  Gosub, HideMenu
+  If WinExist("Adobe Premiere Pro")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Adobe\Adobe Premiere Pro 2023\Adobe Premiere Pro.exe"
+Return
 
 LaunchNotion:
   Gosub, HideMenu
@@ -232,116 +289,119 @@ LaunchNotion:
     WinActivate
   Else
     Send ^!#{o}
-    ; For some reason, a Run WON'T WORK with Electron apps like this one, 
-    ; so using a hotkey defined with WinHotKey 
-    ; Run, "C:\Users\wieka\AppData\Local\Programs\Notion\Notion.exe"
-  Return
+; For some reason, a Run WON'T WORK with Electron apps like this one,
+; so using a hotkey defined with WinHotKey
+; Run, "C:\Users\wieka\AppData\Local\Programs\Notion\Notion.exe"
+Return
 
 LaunchPasswords:
   Gosub, HideMenu
   If WinExist("ahk_exe iCloudPasswords.exe")
     WinActivate
   Else
-    Run, C:\Program Files\WindowsApps\AppleInc.iCloud_13.4.101.0_x86__nzyj5cx40ttqa\iCloud\iCloudPasswords.exe
-  Return
+    ; iCloud Passwords is an app from the Windows store, with a freakishly
+    ; complicated path, so we've created a link for it in the /links
+    ; sub-directory
+    Run, "%LINK_DIR%iCloudPasswords.lnk"
+Return
 
 LaunchGMail:
   Gosub, HideMenu
-  If WinExist("Gmail") 
+  If WinExist("Gmail")
     WinActivate
   Else
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\GMail.lnk"
-  Return
+Return
 
 LaunchGSheets:
   Gosub, HideMenu
-  If WinExist("Tabellen") 
+  If WinExist("Tabellen")
     WinActivate
   Else
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Tabellen.lnk"
-  Return
+Return
 
 GoToSleep:
   Gosub, HideMenu
   DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
-  Return
+Return
 
 LaunchReason:
   Gosub, HideMenu
-  If WinExist("ahk_exe Reason.exe") 
+  If WinExist("ahk_exe Reason.exe")
     WinActivate
   Else
     Run, "C:\Program Files\Propellerhead\Reason 12\Reason.exe"
-  Return
+Return
 
 LaunchReasonPlus:
   Gosub, HideMenu
-  If WinExist("ahk_exe Reason+ Companion.exe") 
+  If WinExist("ahk_exe Reason+ Companion.exe")
     WinActivate
   Else
     Send ^!#{r}
-    ; For some reason, a Run WON'T WORK with Electron apps like this one, 
-    ; so using a hotkey defined with WinHotKey 
-    ;Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason+ Companion.exe"
-    ;Run, "%LOCALAPPDATA%\Programs\reason-plus-companion-app\Reason+ Companion.exe"
-  Return
+; For some reason, a Run WON'T WORK with Electron apps like this one,
+; so using a hotkey defined with WinHotKey
+;Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason+ Companion.exe"
+;Run, "%LOCALAPPDATA%\Programs\reason-plus-companion-app\Reason+ Companion.exe"
+Return
 
 LaunchPowerShell:
   Gosub, HideMenu
-  If WinExist("ahk_exe pwsh.exe") 
+  If WinExist("ahk_exe pwsh.exe")
     WinActivate
   Else
-    ; Spotify is an app from the Windows store, with a freakishly
+    ; PowerShell is an app from the Windows store, with a freakishly
     ; complicated path, so we've created a link for it in the /links
-    ; sub-directory 
+    ; sub-directory
     Run, "%LINK_DIR%PowerShell.lnk"
-  Return
+Return
 
 LaunchSpotify:
   Gosub, HideMenu
-  If WinExist("ahk_exe Spotify.exe") 
+  If WinExist("ahk_exe Spotify.exe")
     WinActivate
   Else
     ; Spotify is an app from the Windows store, with a freakishly
     ; complicated path, so we've created a link for it in the /links
-    ; sub-directory 
+    ; sub-directory
     Run, "%LINK_DIR%Spotify.lnk"
-  Return
+Return
 
 LaunchTotalCommander:
   Gosub, HideMenu
-  If WinExist("ahk_exe TOTALCMD64.EXE") 
+  If WinExist("ahk_exe TOTALCMD64.EXE")
     WinActivate
   Else
     Run, "C:\Program Files\totalcmd\TOTALCMD64.EXE"
-  Return
+Return
 
 LaunchCode:
   Gosub, HideMenu
-  If WinExist("ahk_exe Code.exe") 
+  If WinExist("ahk_exe Code.exe")
     WinActivate
   Else
     Send ^!#{v}
-    ; For some reason, a Run WON'T WORK with Electron apps like this one, 
-    ; so using a hotkey defined with WinHotKey 
-    ;Run, "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
-  Return
+; For some reason, a Run WON'T WORK with Electron apps like this one,
+; so using a hotkey defined with WinHotKey
+;Run, "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
+Return
 
 LaunchVim:
   Gosub, HideMenu
-  If WinExist("ahk_exe gvim.exe") 
+  If WinExist("ahk_exe gvim.exe")
     WinActivate
   Else
     Run, "C:\Program Files (x86)\Vim\vim90\gvim.exe"
-  Return
+Return
 
 ShowMenu:
   Gui, QuickLaunch:Show
-  Return
+Return
 
 HideMenu:
   Gui, QuickLaunch:Hide
-  Return
+Return
 
 ; ------------------------------------------------
 ; Function to add a single QuickLaunch icon button
@@ -351,14 +411,14 @@ AddQuickLaunchButton(name, icon, x, y, target)
 {
   Gui, Add, Button, x%x% y%y% h48 w48 %target% hwnd%name%
   If !ImageButton.Create(%name%, [0, ICON_DIR . icon . ".png", , , , GUI_COLOR])
-    MsgBox, 0, ImageButton Error, % ImageButton.LastError 
+    MsgBox, 0, ImageButton Error, % ImageButton.LastError
 }
 
 AddUnassignedButton(name, icon, x, y)
 {
   Gui, Add, Button, x%x% y%y% h48 w48 gHideMenu hwnd%name%
   If !ImageButton.Create(%name%, [0, ICON_DIR . icon . ".png", , , , GUI_COLOR])
-    MsgBox, 0, ImageButton Error, % ImageButton.LastError 
+    MsgBox, 0, ImageButton Error, % ImageButton.LastError
 
 }
 
@@ -368,15 +428,15 @@ AddUnassignedButton(name, icon, x, y)
 ; Notion work
 ; -----------------------------------------------
 SetDefaultKeyboard(LocaleID){
-	Static SPI_SETDEFAULTINPUTLANG := 0x005A, SPIF_SENDWININICHANGE := 2
-	
-	Lan := DllCall("LoadKeyboardLayout", "Str", Format("{:08x}", LocaleID), "Int", 0)
-	VarSetCapacity(binaryLocaleID, 4, 0)
-	NumPut(LocaleID, binaryLocaleID)
-	DllCall("SystemParametersInfo", "UInt", SPI_SETDEFAULTINPUTLANG, "UInt", 0, "UPtr", &binaryLocaleID, "UInt", SPIF_SENDWININICHANGE)
-	
-	WinGet, windows, List
-	Loop % windows {
-		PostMessage 0x50, 0, % Lan, , % "ahk_id " windows%A_Index%
-	}
+  Static SPI_SETDEFAULTINPUTLANG := 0x005A, SPIF_SENDWININICHANGE := 2
+
+  Lan := DllCall("LoadKeyboardLayout", "Str", Format("{:08x}", LocaleID), "Int", 0)
+  VarSetCapacity(binaryLocaleID, 4, 0)
+  NumPut(LocaleID, binaryLocaleID)
+  DllCall("SystemParametersInfo", "UInt", SPI_SETDEFAULTINPUTLANG, "UInt", 0, "UPtr", &binaryLocaleID, "UInt", SPIF_SENDWININICHANGE)
+
+  WinGet, windows, List
+  Loop % windows {
+    PostMessage 0x50, 0, % Lan, , % "ahk_id " windows%A_Index%
+  }
 }
