@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.30
+Global QL_VERSION := 3.4.1
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -93,7 +93,7 @@ AddQuickLaunchButton("Code", "KeyC", 199, 242, "gLaunchCode")
 AddQuickLaunchButton("Vim", "KeyV", 257, 242, "gLaunchVim")
 AddQuickLaunchButton("Photoshop", "KeyB", 315, 242, "gLaunchPhotoshop")
 AddQuickLaunchButton("Animate", "KeyN", 373, 242, "gLaunchAnimate")
-AddUnassignedButton("UNASSIGNED_KeyM", "KeyM", 431, 242)
+AddQuickLaunchButton("SimpleMind", "KeyM", 431, 242, "gLaunchSimpleMind")
 AddUnassignedButton("UNASSIGNED_KeyComma", "KeyComma", 489, 242)
 AddUnassignedButton("UNASSIGNED_KeyPeriod", "KeyPeriod", 547, 242)
 AddUnassignedButton("UNASSIGNED_KeyDash", "KeyDash", 605, 242)
@@ -118,6 +118,7 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
   i::Gosub, LaunchIllustrator
   b::Gosub, LaunchPhotoshop
   n::Gosub, LaunchAnimate
+  m::Gosub, LaunchSimpleMind
   SC01A::Gosub, LaunchPremiere
   o::Gosub, LaunchNotion
   p::Gosub, LaunchPasswords
@@ -158,7 +159,10 @@ Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with l
 ; QuickLaunch menu (virtual keyboard)
 ; -----------------------------------
 
-;#!^F1::
+#!F2::
+  Gosub, ShowMenu
+Return
+
 SC112::
   Gosub, ShowMenu
 Return
@@ -274,6 +278,14 @@ LaunchAnimate:
     WinActivate
   Else
     Run, "C:\Program Files\Adobe\Adobe Animate 2023\Animate.exe"
+Return
+
+LaunchSimpleMind:
+  Gosub, HideMenu
+  If WinExist("ahk_exe SimpleMindPro.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files (x86)\ModelMakerTools\SimpleMind\2.1.1\SimpleMindPro.exe"
 Return
 
 LaunchPremiere:
