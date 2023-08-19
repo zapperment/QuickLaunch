@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 3.4.1
+Global QL_VERSION := 4.0.0
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -99,6 +99,8 @@ AddUnassignedButton("UNASSIGNED_KeyPeriod", "KeyPeriod", 547, 242)
 AddUnassignedButton("UNASSIGNED_KeyDash", "KeyDash", 605, 242)
 
 Gui, Add, Text, x360 y300 h3 cGray, Thank you for using QuickLaunch, made with love by Zapperment!
+
+Gosub, ShowGui
 
 ; ---------------------------------------------------------
 ; Adding hotkeys to each of the icon buttons on the virtual
