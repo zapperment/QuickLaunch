@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.0.0
+Global QL_VERSION := 4.1.0
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -50,7 +50,7 @@ AddUnassignedButton("UNASSIGNED_KeyF12", "KeyF12", 648, 10)
 AddQuickLaunchButton("Duet", "Key1", 10, 68, "gLaunchDuet")
 AddQuickLaunchButton("Downloads", "Key2", 68, 68, "gLaunchDownloads")
 AddQuickLaunchButton("Bome", "Key3", 126, 68, "gLaunchBome")
-AddUnassignedButton("UNASSIGNED_Key4", "Key4", 184, 68)
+AddQuickLaunchButton("Bome", "Key4", 184, 68, "gLaunchAlienware")
 AddUnassignedButton("UNASSIGNED_Key5", "Key5", 242, 68)
 AddUnassignedButton("UNASSIGNED_Key6", "Key6", 300, 68)
 AddUnassignedButton("UNASSIGNED_Key7", "Key7", 358, 68)
@@ -76,10 +76,10 @@ AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
 AddQuickLaunchButton("GMail", "KeyA", 54, 184, "gLaunchGMail")
 AddQuickLaunchButton("PowerShell", "KeyS", 112, 184, "gLaunchPowerShell")
 AddQuickLaunchButton("GoogleDocs", "KeyD", 170, 184, "gLaunchGDocs")
-AddUnassignedButton("UNASSIGNED_KeyF", "KeyF", 228, 184)
+AddQuickLaunchButton("Calculator", "KeyF", 228, 184, "gLaunchCalculator")
 AddQuickLaunchButton("GitBash", "KeyG", 286, 184, "gLaunchBash")
 AddQuickLaunchButton("GoogleSheets", "KeyH", 344, 184, "gLaunchGSheets")
-AddUnassignedButton("UNASSIGNED_KeyJ", "KeyJ", 402, 184)
+AddQuickLaunchButton("Acrobat", "KeyJ", 402, 184, "gLaunchAcrobat")
 AddQuickLaunchButton("GCalendar", "KeyK", 460, 184, "gLaunchGCalendar")
 AddQuickLaunchButton("AbletonLive", "KeyL", 518, 184, "gLaunchLive")
 AddUnassignedButton("UNASSIGNED_KeyUmlautO", "KeyUmlautO", 576, 184)
@@ -112,6 +112,7 @@ Gosub, ShowGui
   1::Gosub, LaunchDuet
   2::Gosub, LaunchDownloads
   3::Gosub, LaunchBome
+  4::Gosub, LaunchAlienware
   w::Gosub, LaunchWhatsApp
   e::Gosub, LaunchChrome
   r::Gosub, LaunchReason
@@ -128,8 +129,10 @@ Gosub, ShowGui
   a::Gosub, LaunchGMail
   s::Gosub, LaunchPowerShell
   d::Gosub, LaunchGDocs
+  f::Gosub, LaunchCalculator
   g::Gosub, LaunchBash
   h::Gosub, LaunchGSheets
+  j::Gosub, LaunchAcrobat
   k::Gosub, LaunchGCalendar
   l::Gosub, LaunchLive
   y::Gosub, LaunchSpotify
@@ -223,6 +226,22 @@ LaunchGDocs:
     Run, "C:\Users\wieka\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Chrome-Apps\Dokumente.lnk"
 Return
 
+LaunchAlienware:
+  Gosub, HideMenu
+  If WinExist("ahk_class AlienwareCommandCenter")
+    WinActivate
+  Else
+    Run, "%LINK_DIR%Alienware.lnk"
+Return
+
+LaunchCalculator:
+  Gosub, HideMenu
+  If WinExist("ahk_class WindowsCalculator")
+    WinActivate
+  Else
+    Run, "%LINK_DIR%Calculator.lnk"
+Return
+
 LaunchWhatsApp:
   Gosub, HideMenu
   If WinExist("ahk_exe WhatsApp.exe")
@@ -256,6 +275,14 @@ LaunchMax:
     WinActivate
 ; Max can only be started through Ableton Live,
 ; so there is no "Else" here
+Return
+
+LaunchAcrobat:
+  Gosub, HideMenu
+  If WinExist("ahk_exe Acrobat.exe")
+    WinActivate
+  Else
+    Run, "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
 Return
 
 LaunchPhotoshop:
