@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.1.0
+Global QL_VERSION := 4.2.0
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -175,6 +175,13 @@ Return
 ShowGui:
   Gosub, ShowMenu
 Return
+
+XButton1::Ctrl
+
+XButton2::
+  Gosub, ShowMenu
+Return
+
 
 ; --------------------------------------
 ; Subroutines to launch the various apps
