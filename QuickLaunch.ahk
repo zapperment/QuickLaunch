@@ -176,7 +176,7 @@ ShowGui:
   Gosub, ShowMenu
 Return
 
-XButton1::Ctrl
+XButton1::Shift
 
 XButton2::
   Gosub, ShowMenu
