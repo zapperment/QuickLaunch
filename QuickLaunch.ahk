@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.2.0
+Global QL_VERSION := 4.2.1
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -71,7 +71,7 @@ AddQuickLaunchButton("Illustrator", "KeyI", 445, 126, "gLaunchIllustrator")
 AddQuickLaunchButton("Notion", "KeyO", 503, 126, "gLaunchNotion")
 AddQuickLaunchButton("Passwords", "KeyP", 561, 126, "gLaunchPasswords")
 AddQuickLaunchButton("Premiere", "KeyUmlautU", 619, 126, "gLaunchPremiere")
-AddQuickLaunchButton("ReasonPlus", "KeyPlus", 677, 126, "gLaunchReasonPlus")
+AddQuickLaunchButton("ReasonCompanion", "KeyPlus", 677, 126, "gLaunchReasonCompanion")
 
 AddQuickLaunchButton("GMail", "KeyA", 54, 184, "gLaunchGMail")
 AddQuickLaunchButton("PowerShell", "KeyS", 112, 184, "gLaunchPowerShell")
@@ -125,7 +125,7 @@ Gosub, ShowGui
   SC01A::Gosub, LaunchPremiere
   o::Gosub, LaunchNotion
   p::Gosub, LaunchPasswords
-  +::Gosub, LaunchReasonPlus
+  +::Gosub, LaunchReasonCompanion
   a::Gosub, LaunchGMail
   s::Gosub, LaunchPowerShell
   d::Gosub, LaunchGDocs
@@ -383,16 +383,12 @@ LaunchReason:
     Run, "C:\Program Files\Propellerhead\Reason 12\Reason.exe"
 Return
 
-LaunchReasonPlus:
+LaunchReasonCompanion:
   Gosub, HideMenu
-  If WinExist("ahk_exe Reason+ Companion.exe")
+  If WinExist("ahk_exe Reason Companion.exe")
     WinActivate
   Else
-    Send ^!#{r}
-; For some reason, a Run WON'T WORK with Electron apps like this one,
-; so using a hotkey defined with WinHotKey
-;Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason+ Companion.exe"
-;Run, "%LOCALAPPDATA%\Programs\reason-plus-companion-app\Reason+ Companion.exe"
+    Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason Companion.exe"
 Return
 
 LaunchPowerShell:
