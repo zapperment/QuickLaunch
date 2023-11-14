@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.2.1
+Global QL_VERSION := 4.2.2
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -297,7 +297,7 @@ LaunchPhotoshop:
   If WinExist("ahk_exe Photshop.exe")
     WinActivate
   Else
-    Run, "C:\Program Files\Adobe\Adobe Photoshop 2023\Photoshop.exe"
+    Run, "C:\Program Files\Adobe\Adobe Photoshop 2024\Photoshop.exe"
 Return
 
 LaunchIllustrator:
@@ -305,7 +305,7 @@ LaunchIllustrator:
   If WinExist("ahk_exe Illustrator.exe")
     WinActivate
   Else
-    Run, "C:\Program Files\Adobe\Adobe Illustrator 2023\Support Files\Contents\Windows\Illustrator.exe"
+    Run, "C:\Program Files\Adobe\Adobe Illustrator 2024\Support Files\Contents\Windows\Illustrator.exe"
 Return
 
 LaunchAnimate:
@@ -313,7 +313,7 @@ LaunchAnimate:
   If WinExist("ahk_exe Animate.exe")
     WinActivate
   Else
-    Run, "C:\Program Files\Adobe\Adobe Animate 2023\Animate.exe"
+    Run, "C:\Program Files\Adobe\Adobe Animate 2024\Animate.exe"
 Return
 
 LaunchSimpleMind:
@@ -329,7 +329,7 @@ LaunchPremiere:
   If WinExist("Adobe Premiere Pro")
     WinActivate
   Else
-    Run, "C:\Program Files\Adobe\Adobe Premiere Pro 2023\Adobe Premiere Pro.exe"
+    Run, "C:\Program Files\Adobe\Adobe Premiere Pro 2024\Adobe Premiere Pro.exe"
 Return
 
 LaunchNotion:
