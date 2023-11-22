@@ -211,10 +211,10 @@ Return
 
 LaunchLive:
   Gosub, HideMenu
-  If WinExist("ahk_exe Ableton Live 10 Suite.exe")
+  If WinExist("ahk_exe Ableton Live 11 Suite.exe")
     WinActivate
   Else
-    Run, "C:\ProgramData\Ableton\Live 10 Suite\Program\Ableton Live 10 Suite.exe"
+    Run, "C:\ProgramData\Ableton\Live 11 Suite\Program\Ableton Live 11 Suite.exe"
 Return
 
 LaunchGCalendar:
