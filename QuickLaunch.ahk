@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.2.2
+Global QL_VERSION := 4.2.3
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -388,7 +388,7 @@ LaunchReasonCompanion:
   If WinExist("ahk_exe Reason Companion.exe")
     WinActivate
   Else
-    Run, "C:\Users\wieka\AppData\Local\Programs\reason-plus-companion-app\Reason Companion.exe"
+    Run, "C:\Users\wieka\AppData\Local\Programs\reason-companion-app\Reason Companion.exe"
 Return
 
 LaunchPowerShell:
