@@ -5,7 +5,7 @@ SetWorkingDir, %A_ScriptDir%
 #Include ./lib/UseGDIP.ahk
 #Include ./lib/Class_ImageButton.ahk
 
-Global QL_VERSION := 4.2.3
+Global QL_VERSION := 4.3.0
 Global ICON_DIR := A_WorkingDir . "/icons/"
 Global LINK_DIR := A_WorkingDir . "/links/"
 Global GUI_COLOR := 0x333333
@@ -50,8 +50,8 @@ AddUnassignedButton("UNASSIGNED_KeyF12", "KeyF12", 648, 10)
 AddQuickLaunchButton("Duet", "Key1", 10, 68, "gLaunchDuet")
 AddQuickLaunchButton("Downloads", "Key2", 68, 68, "gLaunchDownloads")
 AddQuickLaunchButton("Bome", "Key3", 126, 68, "gLaunchBome")
-AddQuickLaunchButton("Bome", "Key4", 184, 68, "gLaunchAlienware")
-AddUnassignedButton("UNASSIGNED_Key5", "Key5", 242, 68)
+AddQuickLaunchButton("Alienware", "Key4", 184, 68, "gLaunchAlienware")
+AddQuickLaunchButton("Synergy", "Key5", 242, 68, "gLaunchSynergy")
 AddUnassignedButton("UNASSIGNED_Key6", "Key6", 300, 68)
 AddUnassignedButton("UNASSIGNED_Key7", "Key7", 358, 68)
 AddUnassignedButton("UNASSIGNED_Key8", "Key8", 416, 68)
@@ -113,6 +113,7 @@ Gosub, ShowGui
   2::Gosub, LaunchDownloads
   3::Gosub, LaunchBome
   4::Gosub, LaunchAlienware
+  5::Gosub, LaunchSynergy
   w::Gosub, LaunchWhatsApp
   e::Gosub, LaunchChrome
   r::Gosub, LaunchReason
@@ -211,10 +212,10 @@ Return
 
 LaunchLive:
   Gosub, HideMenu
-  If WinExist("ahk_exe Ableton Live 11 Suite.exe")
+  If WinExist("ahk_exe Ableton Live 12 Suite.exe")
     WinActivate
   Else
-    Run, "C:\ProgramData\Ableton\Live 11 Suite\Program\Ableton Live 11 Suite.exe"
+    Run, "C:\ProgramData\Ableton\Live 12 Suite\Program\Ableton Live 12 Suite.exe"
 Return
 
 LaunchGCalendar:
@@ -239,6 +240,14 @@ LaunchAlienware:
     WinActivate
   Else
     Run, "%LINK_DIR%Alienware.lnk"
+Return
+
+LaunchSynergy:
+  Gosub, HideMenu
+  If WinExist("ahk_class Synergy")
+    WinActivate
+  Else
+    Run, "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Synergy.lnk"
 Return
 
 LaunchCalculator:
